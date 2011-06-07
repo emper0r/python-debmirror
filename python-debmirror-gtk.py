@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Author: Tony Pe a <emperor.cu@gmail.com>
+# Author: Tony Pe\xc3a <emperor.cu@gmail.com>
 # License: GPLv3
 # -*- coding: utf-8 -*-
 
@@ -9,6 +9,8 @@ import gtk
 import gtk.glade
 import os
 import re
+import time
+import sys
 
 class MainWindow():
     def __init__(self):
@@ -108,20 +110,30 @@ class MainWindow():
         self.progress_bar.set_fraction(0.0)
 
         os.system(cmd)
-        lines = []
 
-        while 1:
-            log = open("python-debmirror-gtk.log", 'r')
-            log.xreadlines()
-            #lines = log.strip('\r\n')
-
-            if re.match('\[\d+\%\]+', lines):
-                number = re.sub('\D?', "", lines)
+        file = open("./python-debmirror-gtk.log",'r')
+        
+        def tail_f(file):
+            interval = 1.0
+         
+            while True:
+                where = file.tell()
+                line = file.readline()
+                if not line:
+                    time.sleep(interval)
+                    file.seek(where)
+                else:
+                    yield line
+         
+        number = 0.0
+        
+        for line in tail_f(file):
+            if re.match('\[\s*\d+\%\]+', line):
+                number = str(re.match('\[\s*\d+\%\]+', line))
                 per = float(int(number)) / 100.0
                 self.progress_bar.set_fraction(per)
             else:
-                print lines
-            log.close()
+                print line
 
     def run(self):
         gtk.main()
