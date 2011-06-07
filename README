@@ -1,11 +1,9 @@
-Author: Antonio Peña Diaz
+Author: Antonio P. Diaz
 E-mail: emperor.cu@gmail.com
+Date: June 2011
 License: GPLv3
 
 * Debian GUI Mirror
 
-	This project is a tool for GUI users to can get mirror of the Debian Project
-	more easy without use console terminal.
-
-	This project would be add Ubuntu repository in 
-	the future but just for now Debian is a mandatory.
+	This software is a tool for the GUI users to can get mirror 
+	of the Debian Project more easy without use console terminal.

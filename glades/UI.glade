@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<glade-interface>
+  <!-- interface-requires gtk+ 2.16 -->
+  <!-- interface-naming-policy toplevel-contextual -->
+  <widget class="GtkWindow" id="MainWindow">
+    <property name="width_request">515</property>
+    <property name="height_request">400</property>
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">PyMirror</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-always</property>
+    <property name="default_width">300</property>
+    <property name="default_height">270</property>
+    <property name="destroy_with_parent">True</property>
+    <child>
+      <widget class="GtkFixed" id="skin_base">
+        <property name="width_request">515</property>
+        <property name="height_request">400</property>
+        <property name="visible">True</property>
+        <child>
+          <widget class="GtkButton" id="btn_exit">
+            <property name="label" translatable="yes">Salir</property>
+            <property name="width_request">80</property>
+            <property name="height_request">25</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </widget>
+          <packing>
+            <property name="x">265</property>
+            <property name="y">340</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="protocol_text">
+            <property name="width_request">70</property>
+            <property name="height_request">21</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Protocol</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="x">38</property>
+            <property name="y">11</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="origin_text">
+            <property name="width_request">41</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Origin</property>
+          </widget>
+          <packing>
+            <property name="x">45</property>
+            <property name="y">36</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkEntry" id="origin_entry">
+            <property name="width_request">157</property>
+            <property name="height_request">23</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+            <property name="text" translatable="yes">ftp.uk.debian.org</property>
+          </widget>
+          <packing>
+            <property name="x">87</property>
+            <property name="y">35</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="distro_text">
+            <property name="width_request">40</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Distro</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="x">305</property>
+            <property name="y">12</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="section_text">
+            <property name="width_request">45</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Section</property>
+          </widget>
+          <packing>
+            <property name="x">297</property>
+            <property name="y">68</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkCheckButton" id="check_main">
+            <property name="label" translatable="yes">main</property>
+            <property name="width_request">130</property>
+            <property name="height_request">25</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </widget>
+          <packing>
+            <property name="x">345</property>
+            <property name="y">66</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkCheckButton" id="check_contrib">
+            <property name="label" translatable="yes">contrib</property>
+            <property name="width_request">60</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="focus_on_click">False</property>
+            <property name="draw_indicator">True</property>
+          </widget>
+          <packing>
+            <property name="x">345</property>
+            <property name="y">88</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkCheckButton" id="check_non-free">
+            <property name="label" translatable="yes">non-free</property>
+            <property name="width_request">69</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </widget>
+          <packing>
+            <property name="x">345</property>
+            <property name="y">108</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="proxy_text">
+            <property name="width_request">31</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Proxy</property>
+          </widget>
+          <packing>
+            <property name="x">52</property>
+            <property name="y">157</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkProgressBar" id="progress_bar">
+            <property name="width_request">470</property>
+            <property name="height_request">12</property>
+            <property name="visible">True</property>
+          </widget>
+          <packing>
+            <property name="x">23</property>
+            <property name="y">319</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="progress_bar_text">
+            <property name="width_request">490</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">0                                                                                                                 100</property>
+          </widget>
+          <packing>
+            <property name="x">16</property>
+            <property name="y">300</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="host_text">
+            <property name="width_request">34</property>
+            <property name="height_request">22</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Host</property>
+          </widget>
+          <packing>
+            <property name="x">52</property>
+            <property name="y">193</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="port_text">
+            <property name="width_request">37</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Port</property>
+          </widget>
+          <packing>
+            <property name="x">51</property>
+            <property name="y">223</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="auth_prox_text">
+            <property name="width_request">83</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Authentication</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="x">263</property>
+            <property name="y">157</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="user_prox_text">
+            <property name="width_request">64</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Username</property>
+          </widget>
+          <packing>
+            <property name="x">266</property>
+            <property name="y">193</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="pass_prox_text">
+            <property name="width_request">63</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Password</property>
+          </widget>
+          <packing>
+            <property name="x">266</property>
+            <property name="y">222</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkEntry" id="host_entry">
+            <property name="width_request">157</property>
+            <property name="height_request">23</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </widget>
+          <packing>
+            <property name="x">87</property>
+            <property name="y">191</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkEntry" id="port_entry">
+            <property name="width_request">157</property>
+            <property name="height_request">23</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </widget>
+          <packing>
+            <property name="x">87</property>
+            <property name="y">221</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkEntry" id="user_entry">
+            <property name="width_request">157</property>
+            <property name="height_request">23</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </widget>
+          <packing>
+            <property name="x">330</property>
+            <property name="y">191</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkEntry" id="pass_entry">
+            <property name="width_request">157</property>
+            <property name="height_request">23</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can_focus">True</property>
+            <property name="visibility">False</property>
+            <property name="invisible_char">&#x25CF;</property>
+          </widget>
+          <packing>
+            <property name="x">330</property>
+            <property name="y">221</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkComboBox" id="distr">
+            <property name="width_request">139</property>
+            <property name="height_request">24</property>
+            <property name="visible">True</property>
+            <property name="button_sensitivity">on</property>
+            <property name="items" translatable="yes">debian
+debian-security
+debian-backports
+debian-multimedia</property>
+          </widget>
+          <packing>
+            <property name="x">342</property>
+            <property name="y">9</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkComboBox" id="prox_set">
+            <property name="width_request">49</property>
+            <property name="height_request">24</property>
+            <property name="visible">True</property>
+            <property name="items" translatable="yes">No
+Yes</property>
+          </widget>
+          <packing>
+            <property name="x">87</property>
+            <property name="y">155</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkComboBox" id="protocol">
+            <property name="width_request">56</property>
+            <property name="height_request">25</property>
+            <property name="visible">True</property>
+            <property name="items" translatable="yes">http
+ftp</property>
+          </widget>
+          <packing>
+            <property name="x">87</property>
+            <property name="y">9</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="state_text">
+            <property name="width_request">72</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Progress...</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="x">21</property>
+            <property name="y">280</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkButton" id="btn_accept">
+            <property name="label" translatable="yes">Aceptar</property>
+            <property name="width_request">80</property>
+            <property name="height_request">25</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </widget>
+          <packing>
+            <property name="x">180</property>
+            <property name="y">340</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkFileChooserButton" id="filechooser">
+            <property name="width_request">134</property>
+            <property name="height_request">25</property>
+            <property name="visible">True</property>
+            <property name="preview_widget_active">False</property>
+            <property name="action">select-folder</property>
+          </widget>
+          <packing>
+            <property name="x">87</property>
+            <property name="y">62</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="destiny_text">
+            <property name="width_request">40</property>
+            <property name="height_request">22</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Folder</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="x">47</property>
+            <property name="y">61</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="branch_text">
+            <property name="width_request">44</property>
+            <property name="height_request">21</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Branch</property>
+            <property name="wrap">True</property>
+          </widget>
+          <packing>
+            <property name="x">299</property>
+            <property name="y">36</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkComboBox" id="branch">
+            <property name="width_request">139</property>
+            <property name="height_request">24</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="button_sensitivity">on</property>
+            <property name="items" translatable="yes">stable
+testing
+unstable
+experimental</property>
+          </widget>
+          <packing>
+            <property name="x">342</property>
+            <property name="y">34</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</glade-interface>
