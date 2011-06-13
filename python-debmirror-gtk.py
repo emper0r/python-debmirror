@@ -11,8 +11,9 @@ import os
 import re
 import time
 import sys
+from threading import Thread
 
-class MainWindow():
+class MainWindow(Thread):
     def __init__(self):
         self.glade = gtk.glade.XML("./glades/UI.glade")
         self.window = self.glade.get_widget('MainWindow')
@@ -47,6 +48,11 @@ class MainWindow():
 
         self.origin = self.glade.get_widget("origin_entry")
         self.destiny = self.glade.get_widget("filechooser")
+        
+        self.progress_bar = self.glade.get_widget("progress_bar")
+        self.progress_bar.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+        self.progress_bar.pulse()
+        self.progress_bar.set_fraction(0.0)
 
         self.window.show_all()
 
@@ -73,7 +79,7 @@ class MainWindow():
             self.port_entry.set_sensitive(False)
             self.user_entry.set_sensitive(False)
             self.pass_entry.set_sensitive(False)
- 	
+    
     def make_mirror(self, widget):
         origin = self.origin.get_text()
         branch = self.branch.get_active_text()
@@ -99,41 +105,34 @@ class MainWindow():
 
         log = "> python-debmirror-gtk.log &"
 
-        cmd = "debmirror --cleanup -v --allow-dist-rename --host=" + str(origin) + " --root=" + str(distr) + \
+        cmd = "debmirror --cleanup -v --host=" + str(origin) + " --root=" + str(distr) + \
             " --arch=i386 --method=" + str(protocol) + " --dist=" + str(branch) + \
             " --section=" + main + contrib + non_free + " --nosource \
             --ignore-missing-release -ignore-release-gpg --diff=none " + str(destiny) + log
 
-        self.progress_bar = self.glade.get_widget("progress_bar")
-        self.progress_bar.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
-        self.progress_bar.pulse()
-        self.progress_bar.set_fraction(0.0)
-
-        os.system(cmd)
-
         file = open("./python-debmirror-gtk.log",'r')
         
-        def tail_f(file):
-            interval = 1.0
-         
-            while True:
-                where = file.tell()
-                line = file.readline()
-                if not line:
-                    time.sleep(interval)
-                    file.seek(where)
+        digit = 0
+        os.popen(cmd)
+
+        while 1:
+            def tail_f(file):
+                interval = 1.0
+                while True:
+                    where = file.tell()
+                    line = file.readline()
+                    if not line:
+                        time.sleep(interval)
+                        file.seek(where)
+                    else:
+                        yield line
+            for line in tail_f(file): 
+                if re.match('\[\s*\d+\%\]+', line):
+                    digit = re.sub(r'[A-Za-z\[\]\_\/\-\.\%]+', "", line).split()[0]
+                    self.progress_bar.set_fraction(float(digit))
+                    print digit
                 else:
-                    yield line
-         
-        number = 0.0
-        
-        for line in tail_f(file):
-            if re.match('\[\s*\d+\%\]+', line):
-                number = str(re.match('\[\s*\d+\%\]+', line))
-                per = float(int(number)) / 100.0
-                self.progress_bar.set_fraction(per)
-            else:
-                print line
+                    pass
 
     def run(self):
         gtk.main()
