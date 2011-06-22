@@ -103,29 +103,32 @@ class MainWindow(Thread):
 
         destiny = self.destiny.get_current_folder()
 
-        log = "> python-debmirror-gtk.log &"
+        log = " > python-debmirror-gtk.log &"
 
         cmd = "debmirror --cleanup -v --host=" + str(origin) + " --root=" + str(distr) + \
             " --arch=i386 --method=" + str(protocol) + " --dist=" + str(branch) + \
             " --section=" + main + contrib + non_free + " --nosource \
             --ignore-missing-release -ignore-release-gpg --diff=none " + str(destiny) + log
+        
+        print cmd
 
         file = open("./python-debmirror-gtk.log",'r')
         
         digit = 0
         os.popen(cmd)
 
-        while 1:
-            def tail_f(file):
-                interval = 1.0
-                while True:
-                    where = file.tell()
-                    line = file.readline()
-                    if not line:
-                        time.sleep(interval)
-                        file.seek(where)
-                    else:
-                        yield line
+        def tail_f(file):
+            interval = 1.0
+            while True:
+                where = file.tell()
+                line = file.readline()
+                if not line:
+                    time.sleep(interval)
+                    file.seek(where)
+                else:
+                    yield line
+                    
+        def __thread(self, thread):
             for line in tail_f(file): 
                 if re.match('\[\s*\d+\%\]+', line):
                     digit = re.sub(r'[A-Za-z\[\]\_\/\-\.\%]+', "", line).split()[0]
@@ -133,6 +136,8 @@ class MainWindow(Thread):
                     print digit
                 else:
                     pass
+                
+        __thread.start()
 
     def run(self):
         gtk.main()
